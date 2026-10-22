@@ -4,9 +4,9 @@ GateKeeper is a proof-of-concept pre-deployment CI/CD integrity gate for Detecti
 
 It compares a modified Sigma rule with its baseline version and identifies changes that may weaken the rule's intended detection behaviour even when the modified rule remains structurally valid and continues to pass `sigma check`.
 
-This repository contains the GateKeeper prototype, two evaluation datasets, evaluation scripts, saved results, and a local SIEM testbed used to examine the effect of rule changes on detection coverage.
+This repository contains the GateKeeper prototype, two evaluation datasets, evaluation scripts, and a local SIEM testbed used to examine the effect of rule changes on detection coverage.
 
-This work was developed as part of an MSc Cyber Security dissertation. Author and institution details have been removed for double-blind peer review.
+This work was developed as part of an MSc Cyber Security dissertation. Author and institution details have been removed for peer review.
 
 ---
 
@@ -103,10 +103,9 @@ The hybrid approach combines both methods, using the rule-based stage to handle 
 | `gatekeeper/hybrid_reviewer.py` | Runs hybrid review on the hand-built dataset. |
 | `gatekeeper/hybrid_generated.py` | Runs hybrid review on the generated dataset. |
 | `evaluation/` | Hand-built dataset containing 10 baseline-modified rule pairs. |
-| `evaluation_generated/` | Generated dataset containing 125 baseline-modified rule pairs. |
+| `evaluation_generated.zip` | Generated dataset containing 125 baseline-modified rule pairs (unzip to `evaluation_generated/` before running the generated-dataset scripts). |
 | `testbed/load_logs.py` | Loads test events into a local Elasticsearch instance. |
 | `testbed/run_testbed.py` | Compares original and weakened rule outcomes against test events. |
-| `results/` | Saved evaluation results, charts, and summary outputs. |
 | `DATASET_VERSION.md` | Records the pinned SigmaHQ dataset version used for reproducibility. |
 
 ---
@@ -128,7 +127,7 @@ The set contains both weakening and non-weakening examples, allowing GateKeeper 
 
 ### Generated Dataset
 
-The `evaluation_generated/` directory contains **125 baseline-modified rule pairs** generated from **20 sampled SigmaHQ rules**:
+The generated dataset contains **125 baseline-modified rule pairs** generated from **20 sampled SigmaHQ rules**. It is provided as `evaluation_generated.zip`; unzip it in the repository root to produce:
 
 ```text
 evaluation_generated/
@@ -356,7 +355,7 @@ The testbed compares the detection outcome of an original rule with its weakened
 | LLM-assisted | 100% | 100% | 100% |
 | **Hybrid** | **100%** | **100%** | **100%** |
 
-Full per-pair evaluation outputs are available in `results/`.
+The per-pair outputs are written to the console when each evaluation script is run.
 
 ---
 
@@ -385,7 +384,6 @@ These results are proof-of-concept findings and should not be interpreted as gen
 | Model | `claude-sonnet-4-5` |
 | Maximum output | `600` tokens |
 | Temperature | Default |
-| Saved results | `results/` |
 
 The dataset version is also recorded in `DATASET_VERSION.md`.
 
