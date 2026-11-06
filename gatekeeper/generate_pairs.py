@@ -65,11 +65,11 @@ def weaken_condition(rule):
     condition = detection.get("condition")
     if not isinstance(condition, str):
         return None
-    if "all of" in condition:
-        detection["condition"] = condition.replace("all of", "1 of")
+    if "1 of" in condition:
+        detection["condition"] = condition.replace("1 of", "all of")
         return modified
-    if " and " in condition:
-        detection["condition"] = condition.replace(" and ", " or ")
+    if " or " in condition:
+        detection["condition"] = condition.replace(" or ", " and ")
         return modified
     return None
 

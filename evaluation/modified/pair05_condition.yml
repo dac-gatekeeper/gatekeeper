@@ -5,7 +5,7 @@ description: |
     CONSTRUCTED TEST RULE (not from SigmaHQ). Detects a suspicious tool
     only when two indicators are both present. Created to test
     GateKeeper's weakened-condition detection.
-author: Anonymous
+author: Cletus Eze
 date: 2026-06-09
 logsource:
     category: process_creation
@@ -15,7 +15,7 @@ detection:
         Image|endswith: '\suspicious.exe'
     selection_flag:
         CommandLine|contains: '-secret'
-    condition: selection_image or selection_flag
+    condition: selection_image and selection_flag
 falsepositives:
     - Unlikely
 level: high
